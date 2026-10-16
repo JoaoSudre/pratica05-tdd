@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 
 public class CalculadoraNotaTest {
     @Test
-    void deveSomarAsTresNotas() {
+        void deveSomarOutrasNotas() {
         CalculadoraNota calc = new CalculadoraNota();
-        double resultado = calc.calcularNotaFinal(20, 20, 30);
-        assertEquals(70, resultado);
+        double resultado = calc.calcularNotaFinal(10, 15, 25);
+        assertEquals(50, resultado);
     }
 }
