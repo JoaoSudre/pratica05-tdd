@@ -134,4 +134,22 @@ public class CalculadoraNotaTest {
         assertThrows(IllegalArgumentException.class, 
                 () -> calc.aplicarAI(10.0, 20.0, 30.0, 35.0)); // AI maior que 30
     }
+
+    @Test
+    void deveDarReprovadoPorFrequenciaMesmoComNotaAlta() {
+        CalculadoraNota calc = new CalculadoraNota();
+        assertEquals("REPROVADO POR FALTA", calc.situacao(95.0, 74.0));
+    }
+
+    @Test
+    void deveDarReprovadoPorNota() {
+        CalculadoraNota calc = new CalculadoraNota();
+        assertEquals("REPROVADO POR NOTA", calc.situacao(60.0, 90.0));
+    }
+
+    @Test
+    void deveDarReprovadoPorFaltaCasoAmbosFracos() {
+        CalculadoraNota calc = new CalculadoraNota();
+        assertEquals("REPROVADO POR FALTA", calc.situacao(50.0, 60.0));
+    }
 }

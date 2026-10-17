@@ -1,1 +1,0 @@
-# pratica05-tdd

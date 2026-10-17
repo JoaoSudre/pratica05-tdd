@@ -3,6 +3,7 @@ package com.gqs.aula.tdd;
 public class CalculadoraNota {
 
     public static final double NOTA_MINIMA_APROVACAO = 70.0;
+    public static final double FREQUENCIA_MINIMA = 75.0;
 
     private void validarNota(double nota, double notaMaxima, String nomeAvaliacao) {
         if (nota < 0.0 || nota > notaMaxima) {
@@ -19,15 +20,6 @@ public class CalculadoraNota {
 
     public boolean estaAprovadoPorNota(double notaFinal) {
         return notaFinal >= NOTA_MINIMA_APROVACAO;
-    }
-
-    public static final double FREQUENCIA_MINIMA = 75.0;
-
-    public String situacao(double notaFinal, double frequencia) {
-        if (estaAprovadoPorNota(notaFinal) && frequencia >= FREQUENCIA_MINIMA) {
-            return "APROVADO";
-        }
-        return "REPROVADO";
     }
 
     public boolean podeFazerAI(double a1, double a2, double a3, double frequencia) {
@@ -54,5 +46,20 @@ public class CalculadoraNota {
             }
         }
         return a1 + a2 + a3;
+    }
+
+    public static final String STATUS_APROVADO = "APROVADO";
+    public static final String STATUS_REPROVADO_FALTA = "REPROVADO POR FALTA";
+    public static final String STATUS_REPROVADO_NOTA = "REPROVADO POR NOTA";
+
+    public String situacao(double notaFinal, double frequencia) {
+        // A falta tem prioridade
+        if (frequencia < FREQUENCIA_MINIMA) {
+            return STATUS_REPROVADO_FALTA; 
+        }
+        if (estaAprovadoPorNota(notaFinal)) {
+            return STATUS_APROVADO;
+        }
+        return STATUS_REPROVADO_NOTA;
     }
 }
