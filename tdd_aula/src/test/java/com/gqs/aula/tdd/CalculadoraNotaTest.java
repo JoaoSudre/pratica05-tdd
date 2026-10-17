@@ -65,4 +65,28 @@ public class CalculadoraNotaTest {
         double resultado = calc.calcularNotaFinal(30.0, 30.0, 40.0);
         assertEquals(100.0, resultado);
     }
+
+    @Test
+    void deveAprovarComNotaEFrequenciaSuficientes() {
+        CalculadoraNota calc = new CalculadoraNota();
+        assertEquals("APROVADO", calc.situacao(80.0, 90.0));
+    }
+
+    @Test
+    void deveReprovarComNotaBaixa() {
+        CalculadoraNota calc = new CalculadoraNota();
+        assertEquals("REPROVADO", calc.situacao(60.0, 90.0));
+    }
+
+    @Test
+    void deveReprovarPorFrequenciaMesmoComNotaAlta() {
+        CalculadoraNota calc = new CalculadoraNota();
+        assertEquals("REPROVADO", calc.situacao(95.0, 74.0));
+    }
+
+    @Test
+    void deveAprovarComFrequenciaExatamente75() {
+        CalculadoraNota calc = new CalculadoraNota();
+        assertEquals("APROVADO", calc.situacao(70.0, 75.0));
+    }
 }
