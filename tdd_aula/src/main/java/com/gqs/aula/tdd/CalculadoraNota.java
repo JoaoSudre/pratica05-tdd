@@ -38,4 +38,21 @@ public class CalculadoraNota {
 
         return naoAprovadoPorNota && frequenciaSuficiente && condicaoAI;
     }
+
+    public double aplicarAI(double a1, double a2, double a3, double notaAI) {
+        validarNota(notaAI, 30.0, "AI");
+        validarNota(a1, 30.0, "A1");
+        validarNota(a2, 30.0, "A2");
+        validarNota(a3, 40.0, "A3");
+
+        double menorNota = Math.min(a1, a2);
+        if (notaAI > menorNota) {
+            if (a1 == menorNota) {
+                return notaAI + a2 + a3;
+            } else {
+                return a1 + notaAI + a3;
+            }
+        }
+        return a1 + a2 + a3;
+    }
 }

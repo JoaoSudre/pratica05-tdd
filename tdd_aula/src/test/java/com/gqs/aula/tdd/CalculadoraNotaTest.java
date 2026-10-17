@@ -113,4 +113,25 @@ public class CalculadoraNotaTest {
         CalculadoraNota calc = new CalculadoraNota();
         assertFalse(calc.podeFazerAI(10.0, 20.0, 30.0, 70.0)); // Frequência abaixo de 75[cite: 26]
     }
+
+    @Test
+    void deveSubstituirMenorNotaPelaAI() {
+        CalculadoraNota calc = new CalculadoraNota();
+        // A1=10, A2=20, A3=30. Menor é A1(10). Entra AI=25. Nova soma: 25 + 20 + 30 = 75
+        assertEquals(75.0, calc.aplicarAI(10.0, 20.0, 30.0, 25.0));
+    }
+
+    @Test
+    void naoDeveSubstituirSeAIBaixa() {
+        CalculadoraNota calc = new CalculadoraNota();
+        // AI=5 é menor que A1 e A2, então nada muda: 10 + 20 + 30 = 60
+        assertEquals(60.0, calc.aplicarAI(10.0, 20.0, 30.0, 5.0));
+    }
+
+    @Test
+    void deveRejeitarAIInvalida() {
+        CalculadoraNota calc = new CalculadoraNota();
+        assertThrows(IllegalArgumentException.class, 
+                () -> calc.aplicarAI(10.0, 20.0, 30.0, 35.0)); // AI maior que 30
+    }
 }
