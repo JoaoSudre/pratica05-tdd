@@ -29,4 +29,13 @@ public class CalculadoraNota {
         }
         return "REPROVADO";
     }
+
+    public boolean podeFazerAI(double a1, double a2, double a3, double frequencia) {
+        double notaFinal = calcularNotaFinal(a1, a2, a3);
+        boolean naoAprovadoPorNota = !estaAprovadoPorNota(notaFinal);
+        boolean frequenciaSuficiente = frequencia >= FREQUENCIA_MINIMA;
+        boolean condicaoAI = (a1 + a3 >= 40.0) || (a2 + a3 >= 40.0);
+
+        return naoAprovadoPorNota && frequenciaSuficiente && condicaoAI;
+    }
 }
